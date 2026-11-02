@@ -110,6 +110,7 @@ export class CodeReviewOrchestrator {
       const prompt = buildOrchestratorPrompt({ owner, repo, prNumber });
       let structuredOutput: unknown;
       let resultSubtype: string | undefined;
+      let resultError: string | undefined;
 
       for await (const message of query({
         prompt: generateMessages(prompt),
@@ -132,6 +133,14 @@ export class CodeReviewOrchestrator {
 
         if (message.subtype !== 'success') {
           resultSubtype = message.subtype;
+          resultError = message.errors.join('; ');
+          break;
+        }
+
+        // A "success" result can still report an underlying API/auth failure.
+        if (message.is_error) {
+          resultSubtype = message.subtype;
+          resultError = message.result;
           break;
         }
 
@@ -140,10 +149,20 @@ export class CodeReviewOrchestrator {
       }
 
       if (resultSubtype) {
+        const reason = resultError
+          ? `${resultSubtype}: ${resultError}`
+          : resultSubtype;
+
         throw new ReviewError(
-          `Review query failed: ${resultSubtype}`,
+          `Review query failed: ${reason}`,
           ErrorCodes.AGENT_FAILED,
-          { owner, repo, prNumber, subtype: resultSubtype }
+          {
+            owner,
+            repo,
+            prNumber,
+            subtype: resultSubtype,
+            error: resultError
+          }
         );
       }
 
