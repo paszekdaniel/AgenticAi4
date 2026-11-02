@@ -203,12 +203,12 @@ export async function main(
 
   console.log(
     authMethod === 'anthropic'
-      ? '🔐 Using Anthropic API authentication'
-      : '🔐 Using AWS Bedrock authentication'
+      ? 'Using Anthropic API authentication'
+      : 'Using AWS Bedrock authentication'
   );
 
   const model = resolveModel();
-  console.log(`🤖 Model: ${model}`);
+  console.log(`Model: ${model}`);
 
   logger.info('Starting code review CLI', {
     owner,
@@ -222,10 +222,10 @@ export async function main(
   const report = await orchestrator.reviewPullRequest(owner, repo, prNumber);
   const reportPaths = await generateReports(report);
 
-  console.log('\n✅ Code review complete');
-  console.log(`📄 Markdown report: ${reportPaths.markdown}`);
-  console.log(`🌐 HTML report:     ${reportPaths.html}`);
-  console.log(`🧾 JSON report:     ${reportPaths.json}`);
+  console.log('\n Code review complete');
+  console.log(` Markdown report: ${reportPaths.markdown}`);
+  console.log(`HTML report:     ${reportPaths.html}`);
+  console.log(`JSON report:     ${reportPaths.json}`);
 
   logger.info('Reports saved', {
     owner,
