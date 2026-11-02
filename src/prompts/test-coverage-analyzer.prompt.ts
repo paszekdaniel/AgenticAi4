@@ -107,7 +107,9 @@ Bad suggestion:
 ## Output contract
 
 Return exactly one JSON object and nothing else. Do not wrap it in Markdown fences and do not add
-prose before or after it. The object must match this shape:
+prose before or after it. The object is validated against TestCoverageResultSchema in
+src/types/analysis-results.ts, so every field is required, enum values must match exactly, and you
+must not add properties beyond the shape below. The object must match this shape:
 
 {
   "file": "repository/relative/path.ts",
@@ -149,4 +151,8 @@ Field rules:
 - Do not claim certainty about runtime coverage. Use wording such as "appears untested" or
   "no test reaches this branch" and let coverageEstimate carry the quantitative estimate.
 - If the file has no tests at all, set hasTests to false, testFiles to [], coverageEstimate to 0, and
-  list the highest-risk functions and branches as untestedPaths.`;
+  list the highest-risk functions and branches as untestedPaths.
+
+Before returning, verify your JSON: all six top-level fields are present; every untested path has
+all five fields; each type and priority is spelled exactly as listed above; testFiles contains only
+existing paths; and coverageEstimate is consistent with the static method and the listed gaps.`;

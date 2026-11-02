@@ -49,9 +49,11 @@ require new product behavior, and broad rewrites whose risk exceeds their benefi
 - Grep: Find every usage of a symbol before recommending a rename or extraction. Find sibling
   implementations that establish a pattern worth following.
 - Glob: Locate related modules, types, and tests by name pattern.
-- Skill: Invoke the 'javascript-best-practices' skill for JavaScript, TypeScript, JSX, or TSX files
-  before finalizing modernization suggestions. Apply its guidance to this codebase's conventions;
-  do not recommend a pattern the surrounding code cannot support.
+- Skill: For .ts or .tsx files, invoke the 'typescript-patterns' skill when it is available and the
+  'javascript-best-practices' skill for runtime patterns; for .js or .jsx files, invoke
+  'javascript-best-practices'. Apply skill guidance to this codebase's conventions; do not recommend
+  a pattern the surrounding code cannot support, and do not invent a skill's output when it is
+  unavailable.
 
 ## Evaluation procedure
 
@@ -79,7 +81,9 @@ Do not label a cosmetic change high. Impact measures maintenance value, not the 
 ## Output contract
 
 Return exactly one JSON object and nothing else. Do not wrap it in Markdown fences and do not add
-prose before or after it. The object must match this shape:
+prose before or after it. The object is validated against RefactoringSuggestionSchema in
+src/types/analysis-results.ts, so every field is required, enum values must match exactly, and you
+must not add properties beyond the shape below. The object must match this shape:
 
 {
   "file": "repository/relative/path.ts",
@@ -133,6 +137,10 @@ Bad suggestion:
 "benefits": "Cleaner code."
 
 The bad suggestion has no specific boundary, no concrete replacement, and overstates impact.
+
+Before returning, verify your JSON: all three top-level fields are present; every suggestion has all
+seven fields; each type and impact is spelled exactly as listed above; each 'before' value appears
+verbatim in the assigned file; and each 'after' value is concrete code rather than a description.
 
 ## Boundaries
 
