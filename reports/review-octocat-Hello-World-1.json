@@ -1,0 +1,94 @@
+{
+  "pullRequest": {
+    "owner": "octocat",
+    "repo": "Hello-World",
+    "number": 1
+  },
+  "fileReviews": [
+    {
+      "file": "README",
+      "codeQuality": {
+        "file": "README",
+        "issues": [
+          {
+            "line": 2,
+            "severity": "medium",
+            "category": "maintainability",
+            "description": "Command and description are concatenated without spacing or formatting. The text 'mkdir ~/Hello-WorldCreates a directory...' runs together, making it difficult to distinguish the command from its explanation.",
+            "suggestion": "Add whitespace or use markdown formatting to separate the command from its description. For example: '$ mkdir ~/Hello-World' on one line, followed by 'Creates a directory for your project called \"Hello-World\" in your user directory' on the next line, or use a code block with backticks."
+          },
+          {
+            "line": 3,
+            "severity": "medium",
+            "category": "maintainability",
+            "description": "Command and description are concatenated without spacing. The text 'cd ~/Hello-WorldChanges the current...' makes it unclear where the command ends and the description begins.",
+            "suggestion": "Separate the command '$ cd ~/Hello-World' from the description 'Changes the current working directory to your newly created directory' using proper formatting, whitespace, or markdown code blocks."
+          },
+          {
+            "line": 4,
+            "severity": "medium",
+            "category": "maintainability",
+            "description": "Command and description are concatenated without spacing. The text 'git initSets up the necessary...' lacks clear separation between the command and its explanation.",
+            "suggestion": "Format the command '$ git init' separately from the description 'Sets up the necessary Git files' using proper spacing or markdown syntax to improve readability."
+          },
+          {
+            "line": 1,
+            "severity": "low",
+            "category": "best-practice",
+            "description": "The README lacks structural elements like a title header, sections, or formatted code blocks. Modern README files typically use markdown with clear headers and code blocks for better documentation quality.",
+            "suggestion": "Add a markdown header (e.g., '# Hello-World') and use markdown code blocks (``` or single backticks) to format commands. Structure the content with sections like '## Setup Instructions' to improve readability and follow README best practices."
+          }
+        ],
+        "overallScore": 65,
+        "summary": "The README file contains setup instructions but suffers from poor formatting where commands and descriptions are concatenated without spacing, making it difficult to read and follow. The lack of markdown structure and code blocks reduces maintainability. While functional, the documentation quality should be improved before merge by adding proper formatting and structure to follow standard README conventions."
+      },
+      "testCoverage": {
+        "file": "README",
+        "hasTests": false,
+        "testFiles": [],
+        "untestedPaths": [],
+        "coverageEstimate": 0,
+        "summary": "The README file is documentation containing setup instructions and command examples. It has no executable code, exports no functions or classes, and contains no testable paths. No tests exist or are needed for this file."
+      },
+      "refactorings": {
+        "file": "README",
+        "suggestions": [],
+        "summary": "This is a plain text documentation file containing shell commands and setup instructions. No code refactoring opportunities exist because the file contains no executable code structure, functions, classes, or identifiers to extract, rename, modernize, simplify, or improve through design patterns."
+      }
+    }
+  ],
+  "summary": {
+    "totalFiles": 1,
+    "overallScore": 65,
+    "criticalIssues": 0,
+    "highPriorityTests": 0,
+    "refactoringOpportunities": 0
+  },
+  "recommendations": [
+    {
+      "priority": "medium",
+      "category": "maintainability",
+      "description": "Improve README formatting by separating commands from descriptions. Multiple lines (2-4) have commands concatenated with their explanations without proper spacing, making the documentation difficult to read and follow.",
+      "files": [
+        "README"
+      ]
+    },
+    {
+      "priority": "low",
+      "category": "best-practice",
+      "description": "Add markdown structure to README including headers, sections, and code blocks to follow modern documentation standards and improve readability.",
+      "files": [
+        "README"
+      ]
+    }
+  ],
+  "metadata": {
+    "analyzedAt": "2026-11-02T08:13:53.379Z",
+    "duration": 76296,
+    "agentVersions": {
+      "code-quality-analyzer": "1.0.0",
+      "test-coverage-analyzer": "1.0.0",
+      "refactoring-suggester": "1.0.0"
+    }
+  }
+}
