@@ -64,7 +64,7 @@ Your tasks:
 
 - Node.js 18+
 - Anthropic API access (provided in Vocareum workspace) or [your own API key](https://console.anthropic.com/)
-- [GitHub Personal Access Token](https://github.com/settings/tokens) (recommended - scopes: `repo`, `read:org`)
+- [GitHub Personal Access Token](https://github.com/settings/tokens) (required - scopes: `repo`, `read:org`)
 
 ### Installation
 
@@ -110,8 +110,8 @@ ANTHROPIC_MODEL=claude-sonnet-4-5-20250929
 # Project root (REQUIRED)
 PROJECT_ROOT=/voc/work/cd14715-claude-code-classroom/project/starter
 
-# GitHub Token (RECOMMENDED for higher rate limits)
-# GITHUB_TOKEN=ghp_your-token-here
+# GitHub Token (REQUIRED for GitHub MCP)
+GITHUB_TOKEN=ghp_your-token-here
 
 # Logging level (optional)
 LOG_LEVEL=info
@@ -128,8 +128,8 @@ ANTHROPIC_MODEL=claude-sonnet-4-5-20250929
 # Project root (REQUIRED - update to your path)
 PROJECT_ROOT=/absolute/path/to/project/starter
 
-# GitHub Token (RECOMMENDED)
-# GITHUB_TOKEN=ghp_your-token-here
+# GitHub Token (REQUIRED for GitHub MCP)
+GITHUB_TOKEN=ghp_your-token-here
 
 # Logging level (optional)
 LOG_LEVEL=info

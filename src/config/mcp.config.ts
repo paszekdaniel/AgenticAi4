@@ -23,8 +23,8 @@ export const mcpServersConfig = {
    * Transport: stdio (the SDK spawns `npx` and talks over stdin/stdout)
    *
    * Authentication: the server reads GITHUB_PERSONAL_ACCESS_TOKEN, so we map
-   * our GITHUB_TOKEN from .env to that expected name. The token is optional
-   * (recommended for private repos and higher rate limits).
+   * our GITHUB_TOKEN from .env to that expected name. main.ts validates the
+   * token before the review starts, so an empty value cannot reach the server.
    */
   github: {
     type: 'stdio' as const,

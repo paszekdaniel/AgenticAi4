@@ -16,6 +16,6 @@ export const testCoverageAnalyzer: AgentDefinition = {
     'Do not use for security or performance defects (use code-quality-analyzer) or for restructuring ' +
     'production code (use refactoring-suggester).',
   prompt: TEST_COVERAGE_ANALYZER_PROMPT,
-  tools: ['Read', 'Grep', 'Glob'],
+  tools: ['Read', 'Grep', 'Glob', 'Skill'],
   model: 'inherit',
 };

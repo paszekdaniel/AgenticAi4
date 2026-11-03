@@ -137,6 +137,22 @@ export function resolveAuthMethod(env: Environment = process.env): AuthMethod {
 }
 
 /**
+ * Validate and return the required GitHub token used by the GitHub MCP server.
+ */
+export function resolveGitHubToken(env: Environment = process.env): string {
+  const token = env.GITHUB_TOKEN?.trim();
+
+  if (!token) {
+    throw new ReviewError(
+      'GITHUB_TOKEN is required for the GitHub MCP server. Add it to .env as GITHUB_TOKEN=ghp_your_token_here.',
+      ErrorCodes.MISSING_GITHUB_TOKEN
+    );
+  }
+
+  return token;
+}
+
+/**
  * Validate and return the required ANTHROPIC_MODEL value.
  */
 export function resolveModel(env: Environment = process.env): string {
@@ -206,6 +222,8 @@ export async function main(
       ? 'Using Anthropic API authentication'
       : 'Using AWS Bedrock authentication'
   );
+
+  resolveGitHubToken();
 
   const model = resolveModel();
   console.log(`Model: ${model}`);
